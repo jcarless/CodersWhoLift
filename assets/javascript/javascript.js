@@ -10,17 +10,23 @@ function generateExercise(){
 	})
 
 	.done(function(response){
-		var results = response.muscles;
+		var results = response;
 		$('.diagram').empty();
 		$('.description').empty();
 		$('.youtubeArea').empty();
 
 		console.log(results);
 
+		$('.description').append(response.description);
 
 
 	})
 
 }
 
-generateExercise();
+$('#squats').on('click', generateExercise);
+$('#deadlifts').on('click', generateExercise);
+$('#benchpress').on('click', generateExercise);
+$('#militarypress').on('click', generateExercise);
+$('#bentoverrows').on('click', generateExercise);
+$('#crunches').on('click', generateExercise);
