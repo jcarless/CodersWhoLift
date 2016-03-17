@@ -12,107 +12,126 @@
 </head>
 <body class="container">
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
-    </div>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-left">
+		      <a class="navbar-brand" href="#">Fitness Tracker</a>
+	    </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+	   
+	      <form class="navbar-form navbar-right" role="search">
 
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Login - Name">
+	        </div>
+	        <button type="submit" class="btn btn-default" id="login">Submit</button>
+	      </form>
 
+	    </div>
+	  </div>
+	</nav>
+	
+	
 
-	<div class="row buttons">
+		<div class="row panel panel-default" style="padding: 25px; border-width: 3px">
+			<div class="tracker">
 
-		<div class="col-md-2">
-			<img id="squats" src="assets/images/sport1.jpg" data-exercise="squats" data-id="111" height="150px" width="150px">
-			<h3>Squats</h3>
+				<div class="col-md-8 ">
+					<img src="assets/images/lifting.jpg" width="700px" height="300px">
+				</div>
+
+				<div class="col-md-4">
+				<br><br>
+					<form>
+						
+							<div class="form-group">
+								  <label for="exercises">Exercise</label>
+								  <select class="form-control" id="exercise">
+								    <option value="squats">Squats</option>
+								    <option value="deadlifts">Deadlifts</option>
+								    <option value="benchpress">Benchpress</option>
+								    <option value="benchpress">Military Press</option>
+								    <option value="benchpress">Bent Over Rows</option>
+								    <option value="benchpress">Crunches</option>
+								  </select>
+							</div>
+							<div class="form-group">
+							    <label for="startYear">Reps:</label>
+							    <input type="text" class="form-control" id="reps">
+							 </div>
+							 <div class="form-group">
+							    <label for="startYear">Sets:</label>
+							    <input type="text" class="form-control" id="sets">
+							 </div>
+							 <div class="form-group">
+							    <label for="startYear">Weight:</label>
+							    <input type="text" class="form-control" id="weight">
+							 </div>
+					  <br>
+					  <input type="submit" id="submit">
+					</form>
+				</div>
+
+			</div>
+		</div>
+<br>
+
+	<div class="row buttons panel panel-default" style="padding: 25px; border-width: 3px">
+
+		<div class="col-md-2" style="text-align: center">
+			<img id="squats" src="assets/images/sport1.jpg" data-exercise="squats" data-id="111" data-image="0" height="100px" width="100px">
+			<h4>Squats</h4>
 		</div>
 
-		<div class="col-md-2">
-			<img id="deadlifts" src="assets/images/sport2.jpg" data-exercise="deadlifts" data-id="105" height="150px" width="150px">
-			<h3>Dead Lifts</h3>
+		<div class="col-md-2" style="text-align: center">
+			<img id="deadlifts" src="assets/images/sport2.jpg" data-exercise="deadlifts" data-id="105" data-image="1" height="100px" width="100px">
+			<h4>Dead Lifts</h4>
 		</div>
 
-		<div class="col-md-2">
-			<img id="benchpress" src="assets/images/sport3.jpg" data-exercise="bench-press" data-id="192" height="150px" width="150px">
-			<h3>Bench Press</h3>
+		<div class="col-md-2" style="text-align: center">
+			<img id="benchpress" src="assets/images/sport3.jpg" data-exercise="bench-press" data-id="192" data-image="2" height="100px" width="100px">
+			<h4>Bench Press</h4>
 		</div>
 
-		<div class="col-md-2">
-			<img id="militarypress" src="assets/images/sport4.jpg" data-exercise="military-press" data-id="229" height="150px" width="150px">
-			<h3>Military Press</h3>
+		<div class="col-md-2" style="text-align: center">
+			<img id="militarypress" src="assets/images/sport4.jpg" data-exercise="military-press" data-id="229" data-image="3" height="100px" width="100px">
+			<h4>Military Press</h4>
 		</div>
 
-		<div class="col-md-2">
-			<img id="bentoverrows" src="assets/images/sport5.jpg" data-exercise="bent-over-rowing" data-id="109" height="150px" width="150px">
-			<h3>Bent-Over Rows</h3>
+		<div class="col-md-2" style="text-align: center">
+			<img id="bentoverrows" src="assets/images/sport5.jpg" data-exercise="bent-over-rowing" data-id="109" data-image="4" height="100px" width="100px">
+			<h4>Bent-Over Rows</h4>
 		</div>
 
-		<div class="col-md-2">
-			<img id="crunches" src="assets/images/sport6.jpg" data-exercise="negative-crunches" data-id="93" height="150px" width="150px">
-			<h3>Negative Crunches</h3>
+		<div class="col-md-2" style="text-align: center">
+			<img id="crunches" src="assets/images/sport6.jpg" data-exercise="negative-crunches" data-id="93" data-image="5" height="100px" width="100px">
+			<h4>Negative Crunches</h4>
 		</div>
 
 	</div>
 
-
-	<div class="informationSection">
-		<div class="row">
-			<div class="diagram">
-
-			</div>
-		</div>
-
+<br>
+	<div class="informationSection panel panel-default" style="padding: 25px; border-width: 3px">
 		<div class="row">
 			<div class="description">
+			<h4>Description:</h4>
+				<h5>Make sure you have put the barbell at a height where you can comfortably take it out and put it back in. Take it out and make yourself ready: The bar is somewhat lower than your shoulders. The feet are quite apart and point out. The head is in your neck and looks up. The chest is out. Go now slowly down, till your thighs are parallel with the floor, not lower. The knees point outwards, your butt, out. Make a small pause of 1 second and with as much energy as you can, push the weight up. Make a pause of 2 seconds and repeat.</h5>
 
 			</div>
+
+			<br>
 
 		</div>
 
 		<div class="row">
-			<div class="youtubeArea">
-
-			</div>
-			<div class="tracker">
-
+			<div class="diagram col-md-6">
+				<img src="assets/images/squatsmuscles.png" width="450px" height="350px">
 			</div>
 
+			<div class="youtubeArea col-md-6">
+				<img src="https://d13yacurqjgara.cloudfront.net/users/34231/screenshots/283809/youtube-embed.png" width="450px" height="350px"
+				>
+			</div>
 		</div>
 
 	</div>
