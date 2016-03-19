@@ -3,16 +3,16 @@ function generateExercise(){
 
 	var q = $(this).data('image');
 
-		var squatsmuscles = 'assets/images/squatsmuscles.png'
-		var rowsmuscles = 'assets/images/rowmuscles.png'
-		var deadmuscles = 'assets/images/deadliftmuscles.png'
-		var benchmuscles = 'assets/images/benchmuscles.png'
-		var militarymuscles = 'assets/images/militarymuscles.png'
-		var crunchesmuscles = 'assets/images/crunchesmuscles.png'
+		var squatsmuscles = assets/images/squatsmuscles.png
+		var rowsmuscles = assets/images/rowmuscles.png
+		var deadmuscles = assets/images/deadliftmuscles.png
+		var benchmuscles = assets/images/benchmuscles.png
+		var militarymuscles = assets/images/militarymuscles.png
+		var crunchesmuscles = assets/images/crunchesmuscles.png
 
 	var muscles = [squatsmuscles, rowsmuscles, deadmuscles, benchmuscles, militarymuscles, crunchesmuscles];
 
-
+	$('.diagram').append("<img src='"+muscles[q]+"'width='450px' height='350px'>")
 
 
 // APPENDS DESCRIPTION TO PAGE
@@ -35,7 +35,7 @@ function generateExercise(){
 
 
 		$('.description').append(response.description);
-		$('.diagram').append("<img src='"+muscles[q]+"'width='450px' height='350px'>")
+		$('.diagram').append("<img src='" + muscles[q] + "'width='450px' height='350px'>")
 
 	})
 
