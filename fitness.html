@@ -31,28 +31,36 @@
 	  </div>
 	</nav>
 	
-	
 
-		<div class="row panel panel-default" style="padding: 25px; border-width: 3px">
-			<div class="tracker">
+	<div class="panel panel-default" style="padding: 25px; border-width: 3px">
+	<div class="row">
+		<div class="col-md-8">
 
-				<div class="col-md-8 ">
-					<img src="assets/images/lifting.jpg" width="700px" height="300px">
-				</div>
+				<table class="table table-striped table-hover" style="width:100%">
+		    	<tr>
+		    		<th>Exercise</th>
+		    		<th>Repetitions</th>
+		    		<th>Sets</th>
+		    		<th>Weight (lbs)</th>
+		    	</tr>
 
-				<div class="col-md-4">
-				<br><br>
-					<form>
+
+		    </table>
+
+		</div>
+		<div class="col-md-4">
+			<div class="panel panel-default" style="padding: 25px; border-width: 3px">
+				<form>
 						
 							<div class="form-group">
 								  <label for="exercises">Exercise</label>
-								  <select class="form-control" id="exercise">
-								    <option value="squats">Squats</option>
-								    <option value="deadlifts">Deadlifts</option>
-								    <option value="benchpress">Benchpress</option>
-								    <option value="benchpress">Military Press</option>
-								    <option value="benchpress">Bent Over Rows</option>
-								    <option value="benchpress">Crunches</option>
+								  <select class="form-control" id="numRecords">
+								    <option value="squats" id="squats1">Squats</option>
+								    <option value="deadlifts" id="deadlifts1">Deadlifts</option>
+								    <option value="benchpress" id="benchpress1">Benchpress</option>
+								    <option value="benchpress" id="militarypress1">Military Press</option>
+								    <option value="benchpress" id="rows1">Bent Over Rows</option>
+								    <option value="benchpress" id="crunches1">Crunches</option>
 								  </select>
 							</div>
 							<div class="form-group">
@@ -68,73 +76,75 @@
 							    <input type="text" class="form-control" id="weight">
 							 </div>
 					  <br>
-					  <input type="submit" id="submit">
+					  <input type="submit">
 					</form>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="panel panel-default" style="padding: 25px; border-width: 3px">
+		<div class="row">
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="squats" src="assets/images/sport1.jpg" data-exercise="squats" data-id="111" data-image="0" height="100px" width="100px">
+				<h4>Squats</h4>
+			</div>
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="deadlifts" src="assets/images/sport2.jpg" data-exercise="deadlifts" data-id="105" data-image="1" height="100px" width="100px">
+				<h4>Dead Lifts</h4>
+			</div>
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="benchpress" src="assets/images/sport3.jpg" data-exercise="bench-press" data-id="192" data-image="2" height="100px" width="100px">
+				<h4>Bench Press</h4>
+			</div>
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="militarypress" src="assets/images/sport4.jpg" data-exercise="military-press" data-id="229" data-image="3" height="100px" width="100px">
+				<h4>Military Press</h4>
+			</div>
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="bentoverrows" src="assets/images/sport5.jpg" data-exercise="bent-over-rowing" data-id="109" data-image="4" height="100px" width="100px">
+				<h4>Bent-Over Rows</h4>
+			</div>
+
+			<div class="col-md-2" style="text-align: center">
+				<img id="crunches" src="assets/images/sport6.jpg" data-exercise="negative-crunches" data-id="93" data-image="5" height="100px" width="100px">
+				<h4>Negative Crunches</h4>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="panel panel-default" style="padding: 25px; border-width: 3px">
+
+
+				<div class="row">
+					<div class="description">
+						<h5>Make sure you have put the barbell at a height where you can comfortably take it out and put it back in. Take it out and make yourself ready: The bar is somewhat lower than your shoulders. The feet are quite apart and point out. The head is in your neck and looks up. The chest is out. Go now slowly down, till your thighs are parallel with the floor, not lower. The knees point outwards, your butt, out. Make a small pause of 1 second and with as much energy as you can, push the weight up. Make a pause of 2 seconds and repeat.</h5>
+					</div>
 				</div>
 
-			</div>
-		</div>
-<br>
+				<div class="row" style="text-align: center">
+					<div class="col-md-6">
+						<div class="muscles">
+							<img src="assets/images/squatsmuscles.png" width="450px" height="350px">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="youtubeArea">
+							<img src="https://d13yacurqjgara.cloudfront.net/users/34231/screenshots/283809/youtube-embed.png" width="450px" height="350px">
+						</div>
+					</div>
+				</div>
 
-	<div class="row buttons panel panel-default" style="padding: 25px; border-width: 3px">
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="squats" src="assets/images/sport1.jpg" data-exercise="squats" data-id="111" data-image="0" height="100px" width="100px">
-			<h4>Squats</h4>
-		</div>
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="deadlifts" src="assets/images/sport2.jpg" data-exercise="deadlifts" data-id="105" data-image="1" height="100px" width="100px">
-			<h4>Dead Lifts</h4>
-		</div>
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="benchpress" src="assets/images/sport3.jpg" data-exercise="bench-press" data-id="192" data-image="2" height="100px" width="100px">
-			<h4>Bench Press</h4>
-		</div>
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="militarypress" src="assets/images/sport4.jpg" data-exercise="military-press" data-id="229" data-image="3" height="100px" width="100px">
-			<h4>Military Press</h4>
-		</div>
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="bentoverrows" src="assets/images/sport5.jpg" data-exercise="bent-over-rowing" data-id="109" data-image="4" height="100px" width="100px">
-			<h4>Bent-Over Rows</h4>
-		</div>
-
-		<div class="col-md-2" style="text-align: center">
-			<img id="crunches" src="assets/images/sport6.jpg" data-exercise="negative-crunches" data-id="93" data-image="5" height="100px" width="100px">
-			<h4>Negative Crunches</h4>
-		</div>
 
 	</div>
 
-<br>
-	<div class="informationSection panel panel-default" style="padding: 25px; border-width: 3px">
-		<div class="row">
-			<div class="description">
-			<h4>Description:</h4>
-				<h5>Make sure you have put the barbell at a height where you can comfortably take it out and put it back in. Take it out and make yourself ready: The bar is somewhat lower than your shoulders. The feet are quite apart and point out. The head is in your neck and looks up. The chest is out. Go now slowly down, till your thighs are parallel with the floor, not lower. The knees point outwards, your butt, out. Make a small pause of 1 second and with as much energy as you can, push the weight up. Make a pause of 2 seconds and repeat.</h5>
 
-			</div>
-
-			<br>
-
-		</div>
-
-		<div class="row">
-			<div class="diagram col-md-6">
-				<img src="assets/images/squatsmuscles.png" width="450px" height="350px">
-			</div>
-
-			<div class="youtubeArea col-md-6">
-				<img src="https://d13yacurqjgara.cloudfront.net/users/34231/screenshots/283809/youtube-embed.png" width="450px" height="350px"
-				>
-			</div>
-		</div>
-
-	</div>
 
 </body>
 </html>
