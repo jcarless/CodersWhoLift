@@ -70,15 +70,21 @@ $('#login').on('click', function(){
 	$.ajax({url: queryURL, method: 'GET'})
 		.done(function(response) {
 
-	var reps1 = response.repData;
-	var sets1 = response.setData;
-	var weight1 = response.weightData;
+	var reps1 = parseInt(response.data_1458502317.repData);
+	var sets1 = parseInt(response.data_1458502317.setData);
+	var weight1 = parseInt(response.data_1458502317.weightData);
 
-	console.log(response.key());
+// $.each(queryURL, function(index, value) {
+//     console.log(value);
+// }); 
+
+	console.log(reps1);
+	console.log(sets1);
+	console.log(weight1);
 	
 
 
-
+	drawChart(reps1, sets1, weight1);
 		}) //.done
 
 
@@ -125,29 +131,15 @@ $("#addWorkout").on("click", function(){
 
 
 			// PUSH with correct key name
-			// console.log(userName);
-			// console.log(reps);
-			// console.log(sets);
-			// console.log(weight);
 
 			var currentDateTime = moment().format("X");
 
-			fitData.child(userName).child(currentDateTime).set({
+			fitData.child(userName).child('data_'+currentDateTime).set({
 				repData: reps,
 				setData: sets,
-				weightData: weight
+				weightData: weight,
+				timeData: currentDateTime
 				});
-
-
-			// $('#stats').html("<tr>"+
-			// 			"<td>"+reps+"</td>"+
-			// 			"<td>"+sets+"</td>"+
-			// 			"<td>"+weight+"</td>"+
-			// 			+"</tr>");
-
-			// $('#reps').val('');
-			// $('#sets').val('');
-			// $('#weight').val('');
 
 			
 			return false;
@@ -156,17 +148,14 @@ $("#addWorkout").on("click", function(){
  google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+      function drawChart(r, s, w) {
         var data = google.visualization.arrayToDataTable([
           ['Week', 'Reps', 'Sets', 'Weight (x10)'],
-          ['Jan 1',  10,      4,	15],
-          ['Jan 7',  12,      4,	16],
-          ['Jan 14',  8,       3,	18],
-          ['Jan 21',  10,      4,	21],
-          ['Feb 1',  12,      5,	25],
-          ['Feb 7',  15,      5,	31],
-          ['Feb 7',  12,      4,	25],
-          ['Feb 7',  10,      3,	19]
+          ['Jan 1',  	r,      s,		w],
+          ['Jan 7',  	r,      s,		w],
+          ['Jan 14',  	r,      s,		w],
+          ['Jan 21',  	r,      s,		w]
+          
         ]);
 
         var options = {
