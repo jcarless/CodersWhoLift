@@ -1,4 +1,5 @@
 $(document).ready(function($){
+
 function generateExercise(){
 
 	var q = $(this).data('image');
@@ -70,21 +71,63 @@ $('#login').on('click', function(){
 	$.ajax({url: queryURL, method: 'GET'})
 		.done(function(response) {
 
-	var reps1 = parseInt(response.data_1458502317.repData);
-	var sets1 = parseInt(response.data_1458502317.setData);
-	var weight1 = parseInt(response.data_1458502317.weightData);
+	// var reps1 = parseInt(response.data_1458502317.repData);
+	// var sets1 = parseInt(response.data_1458502317.setData);
+	// var weight1 = parseInt(response.data_1458502317.weightData);
+ 
 
-// $.each(queryURL, function(index, value) {
-//     console.log(value);
-// }); 
+	console.log("------------------------");
+	console.log(response);
+	console.log("------------------------")
 
-	console.log(reps1);
-	console.log(sets1);
-	console.log(weight1);
+	var arrayOfData = [];
+
+	$.each(response, function(key, value) {
+		
+		console.log("*********");
+		console.log(key);
+		console.log(value);
+		console.log(value.repData);
+		console.log(value.setData);
+		console.log(value.weightData);
+		console.log(value.timeData);
+		var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
+		console.log(convertedDate);
+		console.log("*********");
+
+		arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+	})
+
+	console.log("[][][][][][][]][][][]][][]");
+	console.log(arrayOfData);
+
+	console.log(arrayOfData.length);
+
+	for (var i = 0; i < arrayOfData.length; i++){
+
+		for (var k = 0; k < arrayOfData[i].length; k++) {
+			console.log(arrayOfData[i][k]);
+
+			// DATA FOR GRAPH
+			//data.push(arrayOfData[i][k]);
+			drawChart(arrayOfData[0][0], parseInt(arrayOfData[0][1]), parseInt(arrayOfData[0][2]), parseInt(arrayOfData[0][3]),
+						arrayOfData[1][0], parseInt(arrayOfData[1][1]), parseInt(arrayOfData[1][2]), parseInt(arrayOfData[1][3]),
+						arrayOfData[2][0], parseInt(arrayOfData[2][1]), parseInt(arrayOfData[2][2]), parseInt(arrayOfData[2][3]),
+						arrayOfData[3][0], parseInt(arrayOfData[3][1]), parseInt(arrayOfData[3][2]), parseInt(arrayOfData[3][3])
+				);
+		}
+		console.log("----------------")
+	}
+	console.log("[][][][][][][]][][][]][][]");
+
+
+	// console.log(reps1);
+	// console.log(sets1);
+	// console.log(weight1);
 	
 
 
-	drawChart(reps1, sets1, weight1);
+	
 		}) //.done
 
 
@@ -103,7 +146,7 @@ $('#login').on('click', function(){
 // 		var userWeight = snapshot.val().weightData;
 // 		var name = snapshot.key();
 
-// 		// Google charts-----------------------------
+
 
 
 	      
@@ -128,33 +171,39 @@ $("#addWorkout").on("click", function(){
 			var reps = $('#reps').val().trim();
 			var sets = $('#sets').val().trim();
 			var weight = $('#weight').val().trim();
-
+			var selected = $('.selectedExercise').val();
 
 			// PUSH with correct key name
 
 			var currentDateTime = moment().format("X");
 
+
 			fitData.child(userName).child('data_'+currentDateTime).set({
 				repData: reps,
 				setData: sets,
 				weightData: weight,
-				timeData: currentDateTime
+				timeData: currentDateTime,
+				workout: selected
 				});
 
 			
 			return false;
 		});	//addWorkout button
 
+
+		// Google charts-----------------------------
  google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart(r, s, w) {
+      function drawChart(date, r, s, w, date1, r1, s1, w1, date2, r2, s2, w2, date3, r3, s3, w3) 
+
+      {
         var data = google.visualization.arrayToDataTable([
-          ['Week', 'Reps', 'Sets', 'Weight (x10)'],
-          ['Jan 1',  	r,      s,		w],
-          ['Jan 7',  	r,      s,		w],
-          ['Jan 14',  	r,      s,		w],
-          ['Jan 21',  	r,      s,		w]
+          ['Date', 'Reps', 'Sets', 'Weight (x10)'],
+          [date,  	r,      s,		w],
+          [date1,  	r1,      s1,		w1],
+          [date2,  	r2,      s2,		w2],
+          [date3,  	r3,      s3,		w3]
           
         ]);
 
