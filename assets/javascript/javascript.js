@@ -35,17 +35,17 @@ function generateExercise(){
 
 	.done(function(response){
 		var results = response;
-		$('.diagram').empty();
-		$('.description').empty();
+		$('.diagram').empty().fadeOut();
+		$('.description').empty().fadeOut();
 
 
 		console.log(results);
 
 
-		$('.description').append(response.description);
+		$('.description').append(response.description).fadeIn();
 		console.log(muscles[q]);
 		console.log("<img src='" + muscles[q] + "' width='450px' height='350px'>");
-		$('.diagram').append("<img src='" + muscles[q] + "' 	width='450px' height='350px'>")
+		$('.diagram').append("<img src='" + muscles[q] + "' 	width='450px' height='350px'>").fadeIn();
 
 	})
 
@@ -197,7 +197,7 @@ $("#addWorkout").on("click", function(){
 
 
 	$('.video').on('click', function(){
-	$('.youtubeArea').empty();
+	$('.youtubeArea').empty().fadeOut().delay(1000);
 	var p = $(this).data('playlist');
 	var playlistID = p;
 		APIkey = "AIzaSyBtMXG8W1P4x4ruQm8r8TjNX1gEjLDWOdo";
@@ -210,6 +210,6 @@ $("#addWorkout").on("click", function(){
 		 })
 
 
-	$('.youtubeArea').append("<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list="+playlistID+"' frameborder='0' allowfullscreen></iframe>");
+	$('.youtubeArea').append("<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list="+playlistID+"' frameborder='0' allowfullscreen></iframe>").fadeIn();
 });
 
