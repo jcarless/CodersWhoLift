@@ -68,6 +68,8 @@ var fitData = new Firebase("https://thefitnessapp.firebaseio.com");
 // Grab Text box value 
 var userName = $('#userID').val().trim(); // userName VALUE REPLACE
 
+
+
 // Search for User
 $('#login').on('click', function(){
 	
@@ -80,17 +82,15 @@ $('#login').on('click', function(){
 	$.ajax({url: queryURL, method: 'GET'})
 		.done(function(response) {
 
-	// var reps1 = parseInt(response.data_1458502317.repData);
-	// var sets1 = parseInt(response.data_1458502317.setData);
-	// var weight1 = parseInt(response.data_1458502317.weightData);
  
-
 	console.log("------------------------");
 	console.log(response);
 	console.log("------------------------")
 
-	var arrayOfData = [];
+	// We created an array of data whose first row is the headers. 
+	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
 
+	// We used an AJAX .each method to loop through the response data tied to the user.... 
 	$.each(response, function(key, value) {
 		
 		console.log("*********");
@@ -104,40 +104,19 @@ $('#login').on('click', function(){
 		console.log(convertedDate);
 		console.log("*********");
 
+		// We pushed the data as another row into our array of data.
 		arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
 	})
 
-	console.log("[][][][][][][]][][][]][][]");
 	console.log(arrayOfData);
-
 	console.log(arrayOfData.length);
 
-	for (var i = 0; i < arrayOfData.length; i++){
-
-		for (var k = 0; k < arrayOfData[i].length; k++) {
-			console.log(arrayOfData[i][k]);
-
-			// DATA FOR GRAPH
-			//data.push(arrayOfData[i][k]);
-			drawChart(arrayOfData[0][0], parseInt(arrayOfData[0][1]), parseInt(arrayOfData[0][2]), parseInt(arrayOfData[0][3]),
-						arrayOfData[1][0], parseInt(arrayOfData[1][1]), parseInt(arrayOfData[1][2]), parseInt(arrayOfData[1][3]),
-						arrayOfData[2][0], parseInt(arrayOfData[2][1]), parseInt(arrayOfData[2][2]), parseInt(arrayOfData[2][3]),
-						arrayOfData[3][0], parseInt(arrayOfData[3][1]), parseInt(arrayOfData[3][2]), parseInt(arrayOfData[3][3])
-				);
-		}
-		console.log("----------------")
-	}
-	console.log("[][][][][][][]][][][]][][]");
-
-
-	// console.log(reps1);
-	// console.log(sets1);
-	// console.log(weight1);
-	
-
+	// Sent our array of data to a function that builds our chart
+	drawChart(arrayOfData);
 
 	
-		}) //.done
+	
+	}) //.done
 
 
 
@@ -195,37 +174,99 @@ console.log(selected);
 				workout: selected
 				});
 
+			reps = $('#reps').val("");
+			sets = $('#sets').val("");
+			weight = $('#weight').val("");
+
+			// firebase api
+	var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
+
+	$.ajax({url: queryURL, method: 'GET'})
+		.done(function(response) {
+
+ 
+	console.log("------------------------");
+	console.log(response);
+	console.log("------------------------")
+
+	// We created an array of data whose first row is the headers. 
+	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
+
+	// We used an AJAX .each method to loop through the response data tied to the user.... 
+	$.each(response, function(key, value) {
+		
+		console.log("*********");
+		console.log(key);
+		console.log(value);
+		console.log(value.repData);
+		console.log(value.setData);
+		console.log(value.weightData);
+		console.log(value.timeData);
+		var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
+		console.log(convertedDate);
+		console.log("*********");
+
+		// We pushed the data as another row into our array of data.
+		arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+	})
+
+	console.log(arrayOfData);
+	console.log(arrayOfData.length);
+
+	// Sent our array of data to a function that builds our chart
+	drawChart(arrayOfData);
+
+	
+	
+	}) //.done
 			
 			return false;
 		});	//addWorkout button
 
 
 		// Google charts-----------------------------
- google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+	google.charts.load('current', {'packages':['corechart']});
+     
+     	// Takes in an array of data 
+      function drawChart(dataArray){
 
-      function drawChart(date, r, s, w, date1, r1, s1, w1, date2, r2, s2, w2, date3, r3, s3, w3) 
-
-      {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Reps', 'Sets', 'Weight (x10)'],
-          [date,  	r,      s,		w],
-          [date1,  	r1,      s1,		w1],
-          [date2,  	r2,      s2,		w2],
-          [date3,  	r3,      s3,		w3]
-          
-        ]);
-
-        var options = {
+      	// Builds initial options for your chart
+      	var options = {
           title: 'Workout Performance',
           curveType: 'function',
           legend: { position: 'bottom' }
-        };
+      	};
 
+
+      	// This loops through our multidimensional array
+		for (var i = 1; i < dataArray.length; i++){
+
+			for (var k = 1; k < dataArray[i].length; k++) {
+
+
+				// Then converts all of the numbers
+				dataArray[i][k] = parseInt(dataArray[i][k]);
+				console.log("Value" + dataArray[i][k])
+
+			}
+			console.log("----------------")
+		}
+
+		// ==================
+
+      	console.log(dataArray);
+
+      	// We take our array and convert it into a Google Data Table
+      	var data = google.visualization.arrayToDataTable(dataArray);
+
+      	// We then send our google data table to be drawn by Google charts and dumped into our ID. 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
         chart.draw(data, options);
-      } //chart
+
+
+
+      } // CHART
+
 // -----------------FIREBASE-------------------------------------------
 
 
