@@ -180,7 +180,8 @@ $("#addWorkout").on("click", function(){
 			var reps = $('#reps').val().trim();
 			var sets = $('#sets').val().trim();
 			var weight = $('#weight').val().trim();
-			var selected = $('.selectedExercise').val();
+			var selected = $('#selectedExercise').val();
+			console.log(selected)
 
 			// PUSH with correct key name
 
