@@ -181,12 +181,11 @@ $("#addWorkout").on("click", function(){
 			var sets = $('#sets').val().trim();
 			var weight = $('#weight').val().trim();
 			var selected = $('#selectedExercise').val();
-			console.log(selected)
 
 			// PUSH with correct key name
 
 			var currentDateTime = moment().format("X");
-
+console.log(selected);
 
 			fitData.child(userName).child('data_'+currentDateTime).set({
 				repData: reps,
