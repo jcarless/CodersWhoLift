@@ -68,6 +68,52 @@ var fitData = new Firebase("https://thefitnessapp.firebaseio.com");
 // Grab Text box value 
 var userName = $('#userID').val().trim(); // userName VALUE REPLACE
 
+$('#selectedExercise').on('change', function(){
+
+	selected = $('#selectedExercise').val();
+
+	// AJAX CALL to your typical approach
+
+	// Inside the ajax call we are going to filter by selected
+
+	// We are going to call our drawChart once again
+
+// firebase api
+	var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
+
+	$.ajax({url: queryURL, method: 'GET'})
+		.done(function(response) {
+
+	// We created an array of data whose first row is the headers. 
+	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
+
+
+	// We used an AJAX .each method to loop through the response data tied to the user.... 
+	$.each(response, function(key, value) {
+
+		if (value.workout == $('#selectedExercise').val()) {
+
+			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
+
+			value.workout
+			// We pushed the data as another row into our array of data.
+			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+		} 
+		
+	})
+
+	// Sent our array of data to a function that builds our chart
+	drawChart(arrayOfData);
+
+	
+	
+	}) //.done
+
+
+
+}); //.on change
+
+
 
 
 // Search for User
@@ -93,19 +139,23 @@ $('#login').on('click', function(){
 	// We used an AJAX .each method to loop through the response data tied to the user.... 
 	$.each(response, function(key, value) {
 		
-		console.log("*********");
-		console.log(key);
-		console.log(value);
-		console.log(value.repData);
-		console.log(value.setData);
-		console.log(value.weightData);
-		console.log(value.timeData);
-		var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
-		console.log(convertedDate);
-		console.log("*********");
 
-		// We pushed the data as another row into our array of data.
-		arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+		if (value.workout == $('#selectedExercise').val()) {
+
+			console.log("*********");
+			console.log(key);
+			console.log(value);
+			console.log(value.repData);
+			console.log(value.setData);
+			console.log(value.weightData);
+			console.log(value.timeData);
+			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
+			console.log(convertedDate);
+			console.log("*********");
+
+			// We pushed the data as another row into our array of data.
+			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+		}
 	})
 
 	console.log(arrayOfData);
@@ -159,7 +209,7 @@ $("#addWorkout").on("click", function(){
 			var reps = $('#reps').val().trim();
 			var sets = $('#sets').val().trim();
 			var weight = $('#weight').val().trim();
-			var selected = $('#selectedExercise').val();
+			selected = $('#selectedExercise').val();
 
 			// PUSH with correct key name
 
@@ -206,8 +256,26 @@ console.log(selected);
 		console.log(convertedDate);
 		console.log("*********");
 
-		// We pushed the data as another row into our array of data.
-		arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+
+
+		if (value.workout == $('#selectedExercise').val()) {
+
+			console.log("*********");
+			console.log(key);
+			console.log(value);
+			console.log(value.repData);
+			console.log(value.setData);
+			console.log(value.weightData);
+			console.log(value.timeData);
+			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
+			console.log(convertedDate);
+			console.log("*********");
+
+			// We pushed the data as another row into our array of data.
+			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
+		}
+
+
 	})
 
 	console.log(arrayOfData);
@@ -234,7 +302,7 @@ console.log(selected);
       	var options = {
           title: 'Workout Performance',
           curveType: 'function',
-          legend: { position: 'bottom' }
+          legend: { position: 'bottom' },
       	};
 
 
@@ -267,7 +335,27 @@ console.log(selected);
 
       } // CHART
 
+
+        // ADD USER FROM MODAL AREA
+      	$("#pushUserName").on('click', function(){
+      		var newUser = $("#newUserName").val().trim();
+
+
+      		fitData.child(newUser).push(newUser);
+
+      			userName: newUser;
+
+      		$("#newUserName").val('');
+
+
+
+      	})
+
+      // ADD USER FROM MODAL AREA
+
+
 // -----------------FIREBASE-------------------------------------------
+
 
 
 // Generates YouTube video section
@@ -275,7 +363,7 @@ console.log(selected);
 
 	$('.video').on('click', function(){
 	$('.youtubeArea').empty().fadeOut().delay(1000);
-	var p = $(this).data('playlist');
+	var p = $(this).data('playlist');						
 	var playlistID = p;
 		APIkey = "AIzaSyBtMXG8W1P4x4ruQm8r8TjNX1gEjLDWOdo";
 		baseURL = "https://www.googleapis.com/youtube/v3/";
@@ -290,3 +378,5 @@ console.log(selected);
 	$('.youtubeArea').append("<iframe width='560' height='315' src='https://www.youtube.com/embed/videoseries?list="+playlistID+"' frameborder='0' allowfullscreen></iframe>").fadeIn();
 });
 
+
+   
