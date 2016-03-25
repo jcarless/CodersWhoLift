@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Fitness Application</title>
-
+	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
 	<!-- firebase -->
@@ -16,12 +16,13 @@
 
 	<link rel="stylesheet" href="assets/css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap Javascript -->
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
 </head>
 <body class="container">
-
+<!-- NAVBAR SECTION -->
 	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-left">
@@ -42,12 +43,12 @@
 	  </div>
 
 	</nav>
-	
+	<!-- END NAVBAR SECTION -->
 
 	<div>
 	<div class="row">
 		<div class="col-md-8">
-
+<!-- THIS IS WHERE THE GRAPH WILL DISPLAY -->
 				<div id="stats">
 					<div id="curve_chart" style="width: 900px; height: 500px; margin-left:-50px; margin-top: -20px; ">
 						
@@ -59,7 +60,7 @@
 		<div class="col-md-4">
 			<div class="panel panel-default" style="padding: 25px; border-width: 3px">
 				<form>
-						
+						<!-- INPUT AREA FOR EXERCISE INFORMATION -->
 							<div class="form-group">
 								  <label for="exercises">Exercise</label>
 								  <!-- on select or on change in javascript -->
@@ -91,7 +92,7 @@
 		</div>
 	</div>
 	</div>
-
+<!-- BEGIN EXERCISE BUTTONS AREA -->
 	<style type="text/css">
 	#squats {
 		hover{
@@ -99,7 +100,7 @@
 		}
 	}
 	</style>
-
+	
 	<div class="panel panel-default" style="padding: 25px; border-width: 3px">
 		<div class="row">
 
@@ -136,22 +137,25 @@
 
 		</div>
 	</div>
-
+<!-- END EXERCISE BUTTONS AREA -->
+<!-- THIS AREA CHANGES WHEN EXERCISE IS PRESSED -->
 	<div class="panel panel-default" style="padding: 25px; border-width: 3px">
 
 
 				<div class="row">
+				<!-- EXERCISE DESCRIPTION -->
 					<div class="description">
 						<h5>Make sure you have put the barbell at a height where you can comfortably take it out and put it back in. Take it out and make yourself ready: The bar is somewhat lower than your shoulders. The feet are quite apart and point out. The head is in your neck and looks up. The chest is out. Go now slowly down, till your thighs are parallel with the floor, not lower. The knees point outwards, your butt, out. Make a small pause of 1 second and with as much energy as you can, push the weight up. Make a pause of 2 seconds and repeat.</h5>
 					</div>
 				</div>
-
+				<!-- MUSCLE DIAGRAM -->
 				<div class="row" style="text-align: center">
 					<div class="col-md-6">
 						<div class="diagram" style="float:left">
 							<img src="assets/images/squatsmuscles.png" width="425px" height="350px">
 						</div>
 					</div>
+					<!-- YOUTUBE VIDEO DISPLAY AREA -->
 					<div class="col-md-6">
 						<div class="youtubeArea" style="margin-left: -100px">
 							<img src="https://d13yacurqjgara.cloudfront.net/users/34231/screenshots/283809/youtube-embed.png" width="450px" height="350px">
@@ -184,7 +188,7 @@
 	  </div>
 	</div>`
 
-	<!-- MODAL FOR LOGIN -->
+	<!-- END MODAL FOR LOGIN -->
 
 </body>
 </html>

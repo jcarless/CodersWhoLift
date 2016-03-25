@@ -1,8 +1,9 @@
 $(document).ready(function($){
+	// FUNCITON TO SET UP EXERCISE DESCRIPTION AND DIAGRAMS
 function generateExercise(){
 
 	var q = $(this).data('image');
-
+	// MUSCLE DIAGRAM IMAGES
 	var muscles = {
 		squatsmuscles:"assets/images/squatsmuscles.png",
 		rowsmuscles:"assets/images/rowmuscles.png",
@@ -31,16 +32,17 @@ function generateExercise(){
 
 		console.log(results);
 
-
+		// APPENDS INFORMATION TO DESCRIPTION SECTION
 		$('.description').append(response.description).fadeIn();
 		console.log(muscles[q]);
 		console.log("<img src='" + muscles[q] + "' width='450px' height='350px'>");
+		// APPENDS IMG HTML TO DIAGRAM SECTION
 		$('.diagram').append("<img src='" + muscles[q] + "' 	width='450px' height='350px'>").fadeIn();
 
 	})
 
 }
-
+// ON CLICK TO RUN ABOVE FUNCTION FOR EACH BUTTON
 $('#squats').on('click', generateExercise);
 $('#deadlifts').on('click', generateExercise);
 $('#benchpress').on('click', generateExercise);
