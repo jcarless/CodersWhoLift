@@ -3,13 +3,6 @@ function generateExercise(){
 
 	var q = $(this).data('image');
 
-		// var squatsmuscles = "assets/images/squatsmuscles.png"
-		// var rowsmuscles = "assets/images/rowmuscles.png"
-		// var deadmuscles = "assets/images/deadliftmuscles.png"
-		// var benchmuscles = "assets/images/benchmuscles.png"
-		// var militarymuscles = "assets/images/militarymuscles.png"
-		// var crunchesmuscles = "assets/images/crunchesmuscles.png"
-
 	var muscles = {
 		squatsmuscles:"assets/images/squatsmuscles.png",
 		rowsmuscles:"assets/images/rowmuscles.png",
@@ -18,9 +11,6 @@ function generateExercise(){
 		militarymuscles:"assets/images/militarymuscles.png",
 		crunchesmuscles:"assets/images/crunchesmuscles.png"
 	}
-	// var muscles = [squatsmuscles, rowsmuscles, deadmuscles, benchmuscles, militarymuscles, crunchesmuscles];
-
-		// $('.diagram').append("<img src='" + q + "' 	width='450px' height='350px'>")
 
 
 // APPENDS DESCRIPTION TO PAGE
@@ -65,55 +55,46 @@ $('#crunches').on('click', generateExercise);
 
 var fitData = new Firebase("https://thefitnessapp.firebaseio.com");
 
-// Grab Text box value 
-var userName = $('#userID').val().trim(); // userName VALUE REPLACE
+var userName = $('#userID').val().trim();
 
-$('#selectedExercise').on('change', function(){
+var plot = function(userName){
 
-	selected = $('#selectedExercise').val();
+		// firebase api
+		var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
 
-	// AJAX CALL to your typical approach
+		$.ajax({url: queryURL, method: 'GET'})
+			.done(function(response) {
 
-	// Inside the ajax call we are going to filter by selected
+		// creating an array of data with first row being labels
+		var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
 
-	// We are going to call our drawChart once again
+		// We used an AJAX .each method to loop through the response data tied to the user.... 
+		$.each(response, function(key, value) {
+			
+			if (value.workout == $('#selectedExercise').val()) {
 
-// firebase api
-	var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
+				var convertedDate = moment.unix(value.timeData).format("M/DD");
 
-	$.ajax({url: queryURL, method: 'GET'})
-		.done(function(response) {
+				// We pushed the data as another row into our array of data.
+				arrayOfData.push([convertedDate, value.repData, value.setData, (value.weightData/10)])
+			}
+		})
 
-	// We created an array of data whose first row is the headers. 
-	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
+		// Sent our array of data to a function that builds our chart
+		drawChart(arrayOfData);
 
+		}) //.done
 
-	// We used an AJAX .each method to loop through the response data tied to the user.... 
-	$.each(response, function(key, value) {
-
-		if (value.workout == $('#selectedExercise').val()) {
-
-			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
-
-			value.workout
-			// We pushed the data as another row into our array of data.
-			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
-		} 
-		
-	})
-
-	// Sent our array of data to a function that builds our chart
-	drawChart(arrayOfData);
-
-	
-	
-	}) //.done
+	};
 
 
+	$('#selectedExercise').on('change', function(){
 
-}); //.on change
+			selected = $('#selectedExercise').val();
 
+		plot(userName);
 
+	}); //.on change
 
 
 // Search for User
@@ -122,84 +103,8 @@ $('#login').on('click', function(){
 	// Grab Text box value 
 	userName = $('#userID').val().trim(); // userName VALUE REPLACE
 
-	// firebase api
-	var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
+	plot(userName);
 
-	$.ajax({url: queryURL, method: 'GET'})
-		.done(function(response) {
-
- 
-	console.log("------------------------");
-	console.log(response);
-	console.log("------------------------")
-
-	// We created an array of data whose first row is the headers. 
-	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
-
-	// We used an AJAX .each method to loop through the response data tied to the user.... 
-	$.each(response, function(key, value) {
-		
-
-		if (value.workout == $('#selectedExercise').val()) {
-
-			console.log("*********");
-			console.log(key);
-			console.log(value);
-			console.log(value.repData);
-			console.log(value.setData);
-			console.log(value.weightData);
-			console.log(value.timeData);
-			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
-			console.log(convertedDate);
-			console.log("*********");
-
-			// We pushed the data as another row into our array of data.
-			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
-		}
-	})
-
-	console.log(arrayOfData);
-	console.log(arrayOfData.length);
-
-	// Sent our array of data to a function that builds our chart
-	drawChart(arrayOfData);
-
-	
-	
-	}) //.done
-
-
-
-
-// 	// Print info 
-// 	fitData.on("child_added", function(snapshot) {
-
-		
-
-// 		// If the snapshot.key is equal to the userName value 
-// 		if (snapshot.key() === userName) {
-	     
-// 	    var userReps = snapshot.val().repData;
-// 		var userSets = snapshot.val().setData;
-// 		var userWeight = snapshot.val().weightData;
-// 		var name = snapshot.key();
-
-
-
-
-	      
-
-// 			console.log(snapshot.key() + " did " + userReps + " reps and " + userSets + ' sets at ' + userWeight + ' lbs');
-
-
-
-			
-
-// 	}; //if function
-
-
-
-// }) //on child_added
 return false;
 }) //login button
 
@@ -214,7 +119,6 @@ $("#addWorkout").on("click", function(){
 			// PUSH with correct key name
 
 			var currentDateTime = moment().format("X");
-console.log(selected);
 
 			fitData.child(userName).child('data_'+currentDateTime).set({
 				repData: reps,
@@ -228,65 +132,7 @@ console.log(selected);
 			sets = $('#sets').val("");
 			weight = $('#weight').val("");
 
-			// firebase api
-	var queryURL = 'https://thefitnessapp.firebaseio.com/'+ userName +'.json';
-
-	$.ajax({url: queryURL, method: 'GET'})
-		.done(function(response) {
-
- 
-	console.log("------------------------");
-	console.log(response);
-	console.log("------------------------")
-
-	// We created an array of data whose first row is the headers. 
-	var arrayOfData = [['Date', 'Reps', 'Sets', 'Weight (x10)']];
-
-	// We used an AJAX .each method to loop through the response data tied to the user.... 
-	$.each(response, function(key, value) {
-		
-		console.log("*********");
-		console.log(key);
-		console.log(value);
-		console.log(value.repData);
-		console.log(value.setData);
-		console.log(value.weightData);
-		console.log(value.timeData);
-		var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
-		console.log(convertedDate);
-		console.log("*********");
-
-
-
-		if (value.workout == $('#selectedExercise').val()) {
-
-			console.log("*********");
-			console.log(key);
-			console.log(value);
-			console.log(value.repData);
-			console.log(value.setData);
-			console.log(value.weightData);
-			console.log(value.timeData);
-			var convertedDate = moment.unix(value.timeData).format("MMM-DD-YY");
-			console.log(convertedDate);
-			console.log("*********");
-
-			// We pushed the data as another row into our array of data.
-			arrayOfData.push([convertedDate, value.repData, value.setData, value.weightData])
-		}
-
-
-	})
-
-	console.log(arrayOfData);
-	console.log(arrayOfData.length);
-
-	// Sent our array of data to a function that builds our chart
-	drawChart(arrayOfData);
-
-	
-	
-	}) //.done
+			plot(userName);
 			
 			return false;
 		});	//addWorkout button
@@ -305,24 +151,18 @@ console.log(selected);
           legend: { position: 'bottom' },
       	};
 
-
       	// This loops through our multidimensional array
 		for (var i = 1; i < dataArray.length; i++){
 
 			for (var k = 1; k < dataArray[i].length; k++) {
-
 
 				// Then converts all of the numbers
 				dataArray[i][k] = parseInt(dataArray[i][k]);
 				console.log("Value" + dataArray[i][k])
 
 			}
-			console.log("----------------")
+			
 		}
-
-		// ==================
-
-      	console.log(dataArray);
 
       	// We take our array and convert it into a Google Data Table
       	var data = google.visualization.arrayToDataTable(dataArray);
@@ -331,15 +171,12 @@ console.log(selected);
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
         chart.draw(data, options);
 
+      } // CHART-----------------------------------
 
-
-      } // CHART
-
-
-        // ADD USER FROM MODAL AREA
+        // ADD USER
       	$("#pushUserName").on('click', function(){
-      		var newUser = $("#newUserName").val().trim();
 
+      		var newUser = $("#newUserName").val().trim();
 
       		fitData.child(newUser).push(newUser);
 
@@ -347,13 +184,7 @@ console.log(selected);
 
       		$("#newUserName").val('');
 
-
-
-      	})
-
-      // ADD USER FROM MODAL AREA
-
-
+      	})//ADD USER
 // -----------------FIREBASE-------------------------------------------
 
 
