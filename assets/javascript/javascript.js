@@ -174,7 +174,7 @@ $("#addWorkout").on("click", function(){
 
 				// Then converts all of the numbers
 				dataArray[i][k] = parseInt(dataArray[i][k]);
-				console.log("Value" + dataArray[i][k])
+				// console.log("Value" + dataArray[i][k])
 			}
 		}
 
@@ -186,7 +186,17 @@ $("#addWorkout").on("click", function(){
         chart.draw(data, options);
 
       } // CHART
+     
+     // DEMO BUTTON
+$('#demo').on('click', function(){
+	
+	// Grab Text box value 
+	userName = 'test';
 
+	plot(userName);
+
+return false;
+}) //DEMO
 
 // -----------------FIREBASE-------------------------------------------
 
